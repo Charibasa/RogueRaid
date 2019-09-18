@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class JY_Button : MonoBehaviour
+public class JY_Lock : MonoBehaviour
 {
     public Sprite Up;
     public Sprite Right;
