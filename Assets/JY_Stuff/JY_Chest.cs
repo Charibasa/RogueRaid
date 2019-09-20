@@ -6,7 +6,7 @@ public class JY_Chest: MonoBehaviour
     public bool isLocked;
     public int numOfLocks;
     public int pointValue;
-    public int[] locks = { 0, 0, 0, 0 };
+    public int[] locks;
 
     GameObject player;
     JY_LockUI lockUI;
@@ -15,7 +15,8 @@ public class JY_Chest: MonoBehaviour
     void Start()
     {
         isLocked = true;
-        player = GameObject.Find("JY_Player");
+        locks = new int[] { 0, 0, 0, 0, 0 };
+        player = GameObject.Find("Player");
         lockUI = GameObject.Find("Canvas").GetComponentInChildren<JY_LockUI>(true);
 
         switch(chestType.ToLower())
@@ -33,8 +34,7 @@ public class JY_Chest: MonoBehaviour
                 pointValue = 900;
                 break;
             default:
-                numOfLocks = 1;
-                pointValue = 50;
+                numOfLocks = 5;
                 break;
         }
     }
@@ -49,13 +49,13 @@ public class JY_Chest: MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "JY_Player")
+        if(collision.gameObject.name == "Player")
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 player.GetComponent<JY_Move>().CanMove = false;
 
-                for (int i = 0; i < numOfLocks; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     locks[i] = Random.Range(1, 5);
                 }

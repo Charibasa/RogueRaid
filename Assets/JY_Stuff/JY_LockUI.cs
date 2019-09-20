@@ -16,13 +16,14 @@ public class JY_LockUI : MonoBehaviour
     public Button Lock2;
     public Button Lock3;
     public Button Lock4;
+    public Button Lock5;
 
     GameObject player;
     GameObject score;
 
     private void OnEnable()
     {
-        player = GameObject.Find("JY_Player");
+        player = GameObject.Find("Player");
         score = GameObject.Find("ScoreText");
 
         locks = chest.numOfLocks;
@@ -32,27 +33,40 @@ public class JY_LockUI : MonoBehaviour
         Lock2.gameObject.SetActive(false);
         Lock3.gameObject.SetActive(false);
         Lock4.gameObject.SetActive(false);
+        Lock5.gameObject.SetActive(false);
 
         Lock1.GetComponent<JY_Lock>().Dir = chest.locks[0];
         Lock1.interactable = true;
         Lock1.gameObject.SetActive(true);
-        Lock2.GetComponent<JY_Lock>().Dir = chest.locks[1];
-        Lock2.interactable = true;
-        Lock2.gameObject.SetActive(true);
 
-        if (locks>2)
+        if(locks > 1)
         {
-            Lock3.GetComponent<JY_Lock>().Dir = chest.locks[2];
-            Lock3.interactable = true;
-            Lock3.gameObject.SetActive(true);
+            Lock2.GetComponent<JY_Lock>().Dir = chest.locks[1];
+            Lock2.interactable = true;
+            Lock2.gameObject.SetActive(true);
 
-            if (locks>3)
+            if (locks > 2)
             {
-                Lock4.GetComponent<JY_Lock>().Dir = chest.locks[3];
-                Lock4.interactable = true;
-                Lock4.gameObject.SetActive(true);
+                Lock3.GetComponent<JY_Lock>().Dir = chest.locks[2];
+                Lock3.interactable = true;
+                Lock3.gameObject.SetActive(true);
+
+                if (locks > 3)
+                {
+                    Lock4.GetComponent<JY_Lock>().Dir = chest.locks[3];
+                    Lock4.interactable = true;
+                    Lock4.gameObject.SetActive(true);
+
+                    if (locks > 4)
+                    {
+                        Lock5.GetComponent<JY_Lock>().Dir = chest.locks[4];
+                        Lock5.interactable = true;
+                        Lock5.gameObject.SetActive(true);
+                    }
+                }
             }
         }
+
 
         EventHandle.SetSelectedGameObject(Lock1.gameObject);
     }
@@ -91,17 +105,21 @@ public class JY_LockUI : MonoBehaviour
             locksLeft--;
             EventHandle.currentSelectedGameObject.GetComponent<Button>().interactable = false;
             
-            if(locks-locksLeft==1)
+            if (locks - locksLeft == 1)
             {
                 EventHandle.SetSelectedGameObject(Lock2.gameObject);
             }
-            else if(locks-locksLeft==2&&locks>2)
+            else if (locks - locksLeft == 2 && locks > 2)
             {
                 EventHandle.SetSelectedGameObject(Lock3.gameObject);
             }
-            else if(locks-locksLeft==3&&locks>3)
+            else if (locks - locksLeft == 3 && locks > 3)
             {
                 EventHandle.SetSelectedGameObject(Lock4.gameObject);
+            }
+            else if (locks - locksLeft == 4 && locks > 4)
+            {
+                EventHandle.SetSelectedGameObject(Lock5.gameObject);
             }
         }
 

@@ -4,20 +4,7 @@ using UnityEngine;
 
 public class JY_Move : MonoBehaviour
 {
-    private bool m_CanMove;
-
-    public bool CanMove
-    {
-        get
-        {
-            return m_CanMove;
-        }
-
-        set
-        {
-            m_CanMove = value;
-        }
-    }
+    public bool CanMove;
 
     // Start is called before the first frame update
     void Start()
