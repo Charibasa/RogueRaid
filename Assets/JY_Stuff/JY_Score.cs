@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class JY_Score : MonoBehaviour
 {
-    public int scoreValue;
+    public float scoreValue;
 
     // Update is called once per frame
     void Update()

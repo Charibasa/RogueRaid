@@ -12,11 +12,8 @@ public class JY_LockUI : MonoBehaviour
     public int unlocks;
     public int input;
     public EventSystem EventHandle;
-    public Button Lock1;
-    public Button Lock2;
-    public Button Lock3;
-    public Button Lock4;
-    public Button Lock5;
+    public Button[] buttonLocks;
+    public GameObject row2;
 
     GameObject player;
     GameObject score;
@@ -27,48 +24,43 @@ public class JY_LockUI : MonoBehaviour
         score = GameObject.Find("ScoreText");
 
         locks = chest.numOfLocks;
-        locksLeft = locks;
-        unlocks = 0;
-        Lock1.gameObject.SetActive(false);
-        Lock2.gameObject.SetActive(false);
-        Lock3.gameObject.SetActive(false);
-        Lock4.gameObject.SetActive(false);
-        Lock5.gameObject.SetActive(false);
 
-        Lock1.GetComponent<JY_Lock>().Dir = chest.locks[0];
-        Lock1.interactable = true;
-        Lock1.gameObject.SetActive(true);
-
-        if(locks > 1)
+        if(player.GetComponent<JY_Move>().hasSimple)
         {
-            Lock2.GetComponent<JY_Lock>().Dir = chest.locks[1];
-            Lock2.interactable = true;
-            Lock2.gameObject.SetActive(true);
-
-            if (locks > 2)
-            {
-                Lock3.GetComponent<JY_Lock>().Dir = chest.locks[2];
-                Lock3.interactable = true;
-                Lock3.gameObject.SetActive(true);
-
-                if (locks > 3)
-                {
-                    Lock4.GetComponent<JY_Lock>().Dir = chest.locks[3];
-                    Lock4.interactable = true;
-                    Lock4.gameObject.SetActive(true);
-
-                    if (locks > 4)
-                    {
-                        Lock5.GetComponent<JY_Lock>().Dir = chest.locks[4];
-                        Lock5.interactable = true;
-                        Lock5.gameObject.SetActive(true);
-                    }
-                }
-            }
+            locks--;
+        }
+        else if(player.GetComponent<JY_Move>().hasDesimple)
+        {
+            locks++;
         }
 
+        locksLeft = locks;
+        unlocks = 0;
 
-        EventHandle.SetSelectedGameObject(Lock1.gameObject);
+        for (int i = 0; i < 8; i++)
+        {
+            buttonLocks[i].gameObject.SetActive(false);
+
+            if (locks > i)
+            {
+                buttonLocks[i].GetComponent<JY_Lock>().Dir = chest.locks[i];
+                buttonLocks[i].interactable = true;
+                buttonLocks[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                buttonLocks[i].gameObject.SetActive(false);
+            }
+
+            if(i > 3)
+            {
+                row2.SetActive(true);
+            }
+
+            Debug.Log(buttonLocks[i].name + " " + buttonLocks[i].IsActive());
+        }
+        
+        EventHandle.SetSelectedGameObject(buttonLocks[0].gameObject);
     }
 
     // Update is called once per frame
@@ -107,19 +99,31 @@ public class JY_LockUI : MonoBehaviour
             
             if (locks - locksLeft == 1)
             {
-                EventHandle.SetSelectedGameObject(Lock2.gameObject);
+                EventHandle.SetSelectedGameObject(buttonLocks[1].gameObject);
             }
             else if (locks - locksLeft == 2 && locks > 2)
             {
-                EventHandle.SetSelectedGameObject(Lock3.gameObject);
+                EventHandle.SetSelectedGameObject(buttonLocks[2].gameObject);
             }
             else if (locks - locksLeft == 3 && locks > 3)
             {
-                EventHandle.SetSelectedGameObject(Lock4.gameObject);
+                EventHandle.SetSelectedGameObject(buttonLocks[3].gameObject);
             }
             else if (locks - locksLeft == 4 && locks > 4)
             {
-                EventHandle.SetSelectedGameObject(Lock5.gameObject);
+                EventHandle.SetSelectedGameObject(buttonLocks[4].gameObject);
+            }
+            else if (locks - locksLeft == 5 && locks > 5)
+            {
+                EventHandle.SetSelectedGameObject(buttonLocks[5].gameObject);
+            }
+            else if (locks - locksLeft == 6 && locks > 6)
+            {
+                EventHandle.SetSelectedGameObject(buttonLocks[6].gameObject);
+            }
+            else if (locks - locksLeft == 7 && locks > 7)
+            {
+                EventHandle.SetSelectedGameObject(buttonLocks[7].gameObject);
             }
         }
 
@@ -128,11 +132,19 @@ public class JY_LockUI : MonoBehaviour
             if(unlocks==locks)
             {
                 chest.isLocked = false;
-                score.GetComponent<JY_Score>().scoreValue += chest.pointValue;
-            }
-            else
-            {
 
+                if (player.GetComponent<JY_Move>().hasSimple)
+                {
+                    score.GetComponent<JY_Score>().scoreValue += chest.pointValue * .8f;
+                }
+                else if (player.GetComponent<JY_Move>().hasDesimple)
+                {
+                    score.GetComponent<JY_Score>().scoreValue += chest.pointValue * 1.2f;
+                }
+                else
+                {
+                    score.GetComponent<JY_Score>().scoreValue += chest.pointValue;
+                }
             }
 
             player.GetComponent<JY_Move>().CanMove = true;
