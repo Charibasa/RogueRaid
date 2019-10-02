@@ -18,7 +18,7 @@ public class JY_PowerUpPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpeedImage.value = player.GetComponent<JY_Move>().speedUp;
+        SpeedImage.value = player.GetComponent<JY_Move>().speedBuff;
 
         if(player.GetComponent<JY_Move>().hasSimple)
         {

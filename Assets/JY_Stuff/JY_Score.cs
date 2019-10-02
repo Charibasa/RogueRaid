@@ -10,9 +10,9 @@ public class JY_Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(scoreValue > 9999999)
+        if(scoreValue > 999999999)
         {
-            gameObject.GetComponent<Text>().text = "9,999,999 g";
+            gameObject.GetComponent<Text>().text = "999,999,999 g";
         }
         else
         {

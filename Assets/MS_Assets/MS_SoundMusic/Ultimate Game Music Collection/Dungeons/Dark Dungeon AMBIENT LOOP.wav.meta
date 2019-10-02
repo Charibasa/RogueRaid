@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-guid: a93894bea89444165b280c23fc15abab
-labels:
-- Audio
-- Dark
-- Loop
+guid: 707c062812d9a2d4eacd7fb4eed4eb85
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
