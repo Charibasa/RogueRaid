@@ -13,11 +13,14 @@ public class JY_PowerUpImage : MonoBehaviour
     void Start()
     {
         SR = GetComponent<Image>();
+        value = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        value = Mathf.Clamp(value, 0, 5);
+
         SR.sprite = ranks[value];
     }
 }

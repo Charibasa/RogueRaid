@@ -25,9 +25,9 @@ public class JY_PowerUp : MonoBehaviour
         switch(powerType)
         {
             case "Speed":
-                if(player.speedUp < 5)
+                if(player.speedBuff < 5)
                 {
-                    player.speedUp++;
+                    player.speedBuff++;
                 }
                 break;
             case "Guard":

@@ -6,6 +6,7 @@ public class JY_Move : MonoBehaviour
 {
     public bool CanMove;
     public int speedUp;
+    public int speedBuff;
     public int guardUp;
     public bool hasSimple;
     public bool hasDesimple;
@@ -27,7 +28,7 @@ public class JY_Move : MonoBehaviour
 
         Vector3 m = new Vector3(h, v, 0);
 
-        Vector3 t = transform.position + m * Time.deltaTime * (5 + speedUp);
+        Vector3 t = transform.position + m * Time.deltaTime * (5 + speedUp + (speedBuff/2));
 
         if(CanMove)
         {
