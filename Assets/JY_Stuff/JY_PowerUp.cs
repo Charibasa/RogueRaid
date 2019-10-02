@@ -5,12 +5,19 @@ using UnityEngine;
 public class JY_PowerUp : MonoBehaviour
 {
     public string powerType;
+    public float timeAdding = 10f;
 
     JY_Move player;
+    JZ_Timer timing;
+    public GameManager GM;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<JY_Move>();
+        timing = GameObject.Find("Canvas").GetComponent<JZ_Timer>();
+        //for instantly calling game end on insta death 
+        //or we can set timeReduction float in JZ_Timer to 9999999 to make time count zero
+        // GM.GetComponent<GameManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,7 +39,8 @@ public class JY_PowerUp : MonoBehaviour
                 player.hasDesimple = true;
                 break;
             case "Time":
-                //code to increase timer by 10 seconds
+                //code to increase timer by 10 seconds 
+                timing.addtime(timeAdding);
                 break;
         }
 
