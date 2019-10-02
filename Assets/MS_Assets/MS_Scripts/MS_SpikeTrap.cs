@@ -5,46 +5,34 @@ using UnityEngine;
 public class MS_SpikeTrap : MonoBehaviour
 {
     GameObject player;
+    public GameManager GM;
+    JZ_Timer timing;
 
     int tempSpeed;
-    float timer = 5.0f;
-    bool inCollider = false;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        timing = GameObject.Find("Canvas").GetComponent<JZ_Timer>();
 
         tempSpeed = player.GetComponent<JY_Move>().speedUp;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        inCollider = true;
         player.GetComponent<JY_Move>().speedUp = tempSpeed - 2;
-        if (inCollider == true)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                timer = 0;
-
-                print("Working...");
-                Invoke("TimeDamage", 2);
-            }
-        }
+        Invoke("TimeDamage", 0.5f);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        inCollider = false;
-        timer = 5.0f;
         player.GetComponent<JY_Move>().speedUp = tempSpeed;
     }
 
     void TimeDamage()
     {
-        //Time damage here
+        timing.reducetime(10f);
         print("Your time has been damaged.");
     }
 }

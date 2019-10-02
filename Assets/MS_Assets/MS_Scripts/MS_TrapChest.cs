@@ -14,6 +14,9 @@ public class MS_TrapChest : MonoBehaviour
     //MS Variables
     int saveSpeed;
 
+    public GameManager GM;
+    JZ_Timer timing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,7 @@ public class MS_TrapChest : MonoBehaviour
 
         //MS Additions to Start
         saveSpeed = player.GetComponent<JY_Move>().speedUp;
+        timing = GameObject.Find("Canvas").GetComponent<JZ_Timer>();
 
         switch (chestType)
         {
@@ -75,9 +79,10 @@ public class MS_TrapChest : MonoBehaviour
                 //MS Tags determine whether the chest is trapped or not
                 if (this.tag == "Trapped")
                 {
-                    //Time damage here
+                    timing.reducetime(20f);
                     player.GetComponent<JY_Move>().speedUp = -4;
-                    Invoke("SaveSpeed", 5);
+                    Invoke("SaveSpeed", 4);
+                    Destroy(gameObject, 4);
                 }
                 else
                 {
