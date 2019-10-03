@@ -28,6 +28,7 @@ public class JY_TeleporterEntrance : MonoBehaviour
 
     IEnumerator floorTransition()
     {
+        
         fade = GameObject.Find("Fade").GetComponent<Animator>();
         fadeImage = GameObject.Find("Fade").GetComponent<Image>();
         fade.SetBool("Fade", true);

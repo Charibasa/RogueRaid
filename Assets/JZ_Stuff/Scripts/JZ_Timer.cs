@@ -22,7 +22,7 @@ public class JZ_Timer : MonoBehaviour
     {
         if (countdown <= 0f)
         {
-            //end game
+            GM.endGame();
         }
         // countdown -= timeReduction;
         // countdown += timeAddition;
@@ -30,11 +30,13 @@ public class JZ_Timer : MonoBehaviour
         countdown = Mathf.Clamp(countdown,0f,Mathf.Infinity);
         roundTimerTxt.text = string.Format("{0:00.0}", countdown);
     }
-    public float addtime(float timeAdding) {
-        return countdown + timeAdding;
+    public void addtime(float timeAdding) {
+        // Debug.Log("Called Add time");
+        countdown += timeAdding;
+        // Debug.Log(timeleft);
+        // return timeleft;
     }
-    public float reducetime(float timeReducing) {
-        
-        return countdown - timeReducing;
+    public void reducetime(float timeReducing) {
+        countdown -= timeReducing; 
     }
 }

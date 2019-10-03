@@ -9,7 +9,7 @@ public class JY_PowerUp : MonoBehaviour
 
     JY_Move player;
     JZ_Timer timing;
-    public GameManager GM;
+    // public GameManager GM;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +46,7 @@ public class JY_PowerUp : MonoBehaviour
                 break;
             case "Time":
                 //code to increase timer by 10 seconds 
+                Debug.Log("Calling Add time");
                 timing.addtime(timeAdding);
                 break;
         }
