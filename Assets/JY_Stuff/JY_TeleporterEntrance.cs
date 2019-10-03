@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class JY_TeleporterEntrance : MonoBehaviour
 {
-    public JY_TeleporterExit[] exits;
-
-    int timesTeleported;
-    bool teleported;
+    public JY_TeleporterExit exit;
+    public bool increments;
     Animator fade;
     Image fadeImage;
     Text floor;
@@ -17,36 +15,29 @@ public class JY_TeleporterEntrance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        teleported = false;
         player = GameObject.Find("Player");
         floor = GameObject.Find("LevelText").GetComponent<Text>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
-        {
-            int nextFloor = Random.Range(0, 9);
+        player.GetComponent<JY_Move>().CanMove = false;
 
-            if (!exits[nextFloor].hasBeenAccessed)
-            {
-                player.GetComponent<JY_Move>().CanMove = false;
-
-                StartCoroutine(floorTransition(nextFloor));
-            }
-        }
+        StartCoroutine(floorTransition());
     }
 
-    IEnumerator floorTransition(int floor)
+    IEnumerator floorTransition()
     {
         fade = GameObject.Find("Fade").GetComponent<Animator>();
         fadeImage = GameObject.Find("Fade").GetComponent<Image>();
         fade.SetBool("Fade", true);
         yield return new WaitUntil(() => fadeImage.color.a == 1);
-        player.transform.position = exits[floor].transform.position;
-        exits[floor].hasBeenAccessed = true;
-        timesTeleported++;
+        player.transform.position = exit.transform.position;
         fade.SetBool("Fade", false);
         player.GetComponent<JY_Move>().CanMove = true;
+        if(increments)
+        {
+            floor.text = "" + (int.Parse(floor.text) + 1);
+        }
     }
 }

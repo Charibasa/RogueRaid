@@ -56,8 +56,6 @@ public class JY_LockUI : MonoBehaviour
             {
                 row2.SetActive(true);
             }
-
-            Debug.Log(buttonLocks[i].name + " " + buttonLocks[i].IsActive());
         }
         
         EventHandle.SetSelectedGameObject(buttonLocks[0].gameObject);
@@ -135,15 +133,15 @@ public class JY_LockUI : MonoBehaviour
 
                 if (player.GetComponent<JY_Move>().hasSimple)
                 {
-                    score.GetComponent<JY_Score>().scoreValue += chest.pointValue * .8f;
+                    score.GetComponent<JY_Score>().addValue += Mathf.Round(chest.pointValue * .8f);
                 }
                 else if (player.GetComponent<JY_Move>().hasDesimple)
                 {
-                    score.GetComponent<JY_Score>().scoreValue += chest.pointValue * 1.2f;
+                    score.GetComponent<JY_Score>().addValue += Mathf.Round(chest.pointValue * 1.2f);
                 }
                 else
                 {
-                    score.GetComponent<JY_Score>().scoreValue += chest.pointValue;
+                    score.GetComponent<JY_Score>().addValue += Mathf.Round(chest.pointValue);
                 }
             }
 
