@@ -9,20 +9,22 @@ public class JY_TeleporterEntrance : MonoBehaviour
     public bool increments;
     Animator fade;
     Image fadeImage;
-    Text floor;
+    Text zone;
     GameObject player;
+    JY_SFXManager sound;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-        floor = GameObject.Find("LevelText").GetComponent<Text>();
+        zone = GameObject.Find("LevelText").GetComponent<Text>();
+        sound = GameObject.Find("SFXManager").GetComponent<JY_SFXManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
             player.GetComponent<JY_Move>().CanMove = false;
-
+            sound.playSound(5);
             StartCoroutine(floorTransition());
     }
 
@@ -37,7 +39,7 @@ public class JY_TeleporterEntrance : MonoBehaviour
         player.GetComponent<JY_Move>().CanMove = true;
         if(increments)
         {
-            floor.text = "" + (int.Parse(floor.text) + 1);
+            zone.text = "" + (int.Parse(zone.text) + 1);
         }
     }
 }

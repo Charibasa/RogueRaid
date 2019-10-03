@@ -17,11 +17,13 @@ public class JY_LockUI : MonoBehaviour
 
     GameObject player;
     GameObject score;
+    JY_SFXManager sound;
 
     private void OnEnable()
     {
         player = GameObject.Find("Player");
         score = GameObject.Find("ScoreText");
+        sound = GameObject.Find("SFXManager").GetComponent<JY_SFXManager>();
 
         locks = chest.numOfLocks;
 
@@ -57,7 +59,8 @@ public class JY_LockUI : MonoBehaviour
                 row2.SetActive(true);
             }
         }
-        
+
+        sound.playSound(3);
         EventHandle.SetSelectedGameObject(buttonLocks[0].gameObject);
     }
 
@@ -92,6 +95,7 @@ public class JY_LockUI : MonoBehaviour
                 unlocks++;
             }
 
+            sound.playSound(2);
             locksLeft--;
             EventHandle.currentSelectedGameObject.GetComponent<Button>().interactable = false;
             
@@ -130,7 +134,7 @@ public class JY_LockUI : MonoBehaviour
             if(unlocks==locks)
             {
                 chest.isLocked = false;
-
+                sound.playSound(7);
                 if (player.GetComponent<JY_Move>().hasSimple)
                 {
                     score.GetComponent<JY_Score>().addValue += Mathf.Round(chest.pointValue * .8f);
@@ -143,6 +147,11 @@ public class JY_LockUI : MonoBehaviour
                 {
                     score.GetComponent<JY_Score>().addValue += Mathf.Round(chest.pointValue);
                 }
+            }
+
+            if(chest.isLocked)
+            {
+                sound.playSound(6);
             }
 
             player.GetComponent<JY_Move>().CanMove = true;

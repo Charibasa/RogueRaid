@@ -30,11 +30,11 @@ public class JZ_Timer : MonoBehaviour
         countdown = Mathf.Clamp(countdown,0f,Mathf.Infinity);
         roundTimerTxt.text = string.Format("{0:00.0}", countdown);
     }
-    public float addtime(float timeAdding) {
-        return countdown + timeAdding;
+    public void addtime(float timeAdding) {
+        countdown += timeAdding;
     }
-    public float reducetime(float timeReducing) {
+    public void reducetime(float timeReducing) {
         
-        return countdown - timeReducing;
+        countdown -= timeReducing;
     }
 }
