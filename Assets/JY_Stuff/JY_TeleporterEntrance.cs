@@ -23,9 +23,12 @@ public class JY_TeleporterEntrance : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.name == "Player")
+        {
             player.GetComponent<JY_Move>().CanMove = false;
             sound.playSound(5);
             StartCoroutine(floorTransition());
+        }
     }
 
     IEnumerator floorTransition()
