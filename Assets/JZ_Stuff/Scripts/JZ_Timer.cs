@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class JZ_Timer : MonoBehaviour
 {
-    // public float timeReduction = 0f;
-    // public float timeAddition = 0f;
     public float roundTime = 2f;
     public float countdown = 2f;
     public GameManager GM;
@@ -22,10 +20,8 @@ public class JZ_Timer : MonoBehaviour
     {
         if (countdown <= 0f)
         {
-            //end game
+            GM.endGame();
         }
-        // countdown -= timeReduction;
-        // countdown += timeAddition;
         countdown -= Time.deltaTime;
         countdown = Mathf.Clamp(countdown,0f,Mathf.Infinity);
         roundTimerTxt.text = string.Format("{0:00.0}", countdown);
@@ -34,7 +30,6 @@ public class JZ_Timer : MonoBehaviour
         countdown += timeAdding;
     }
     public void reducetime(float timeReducing) {
-        
-        countdown -= timeReducing;
+        countdown -= timeReducing; 
     }
 }

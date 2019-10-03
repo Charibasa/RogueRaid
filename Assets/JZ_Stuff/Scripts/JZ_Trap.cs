@@ -13,6 +13,9 @@ public class JZ_Trap : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<JY_Move>();
         timing = GameObject.Find("Canvas").GetComponent<JZ_Timer>();
+        //for instantly calling game end on insta death 
+        //or we can set timeReduction float in JZ_Timer to 9999999 to make time count zero
+        // GM.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
