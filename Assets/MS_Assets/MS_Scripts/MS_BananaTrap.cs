@@ -19,24 +19,21 @@ public class MS_BananaTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        sound.playSound(1);
-
-        if(player.GetComponent<JY_Move>().guardUp > 0)
+        if(collision.name == "Player")
         {
-            player.GetComponent<JY_Move>().guardUp--;
-        }
-        else
-        {
-            Invoke("DeathByBananaPeel", 0.1f);
-        }
-        
-        Destroy(gameObject);
-    }
+            sound.playSound(1);
 
-    void DeathByBananaPeel()
-    {
-        player.GetComponent<JY_Move>().CanMove = false;
-        timing.reducetime(999f);
-        print("Death by banana peel");
+            if (player.GetComponent<JY_Move>().guardUp > 0)
+            {
+                player.GetComponent<JY_Move>().guardUp--;
+            }
+            else
+            {
+                player.GetComponent<JY_Move>().CanMove = false;
+                timing.reducetime(999f);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

@@ -47,8 +47,7 @@ public class JY_PowerUp : MonoBehaviour
                 player.hasDesimple = true;
                 break;
             case "Time":
-                //code to increase timer by 10 seconds 
-                Debug.Log("Calling Add time");
+                //code to increase timer by 10 seconds
                 timing.addtime(timeAdding);
                 break;
         }
