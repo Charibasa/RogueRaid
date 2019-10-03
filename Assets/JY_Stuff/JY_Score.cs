@@ -7,6 +7,7 @@ public class JY_Score : MonoBehaviour
 {
     public float scoreValue;
     public float addValue;
+
     // Update is called once per frame
     void Update()
     {
