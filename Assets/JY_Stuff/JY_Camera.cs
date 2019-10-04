@@ -12,7 +12,7 @@ public class JY_Camera : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        roomCenter = new Vector2(-70, 0.5f);
+        roomCenter = new Vector2(player.transform.position.x, 0.5f);
     }
 
     // Update is called once per frame
